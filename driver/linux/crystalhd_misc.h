@@ -73,13 +73,13 @@ struct crystalhd_dio_user_info {
 	uint32_t		y_done_sz;
 	uint32_t		uv_done_sz;
 	uint32_t		comp_flags;
-	bool			b422mode;
+	uint32_t		b422mode;
 };
 
 struct crystalhd_dio_req {
 	uint32_t						sig;
 	uint32_t						max_pages;
-	struct page						**pages;
+  	struct page						**pages;
 	struct scatterlist				*sg;
 	int								sg_cnt;
 	int								page_cnt;

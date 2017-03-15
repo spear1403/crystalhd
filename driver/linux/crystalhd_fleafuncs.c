@@ -593,6 +593,8 @@ void crystalhd_flea_runtime_power_dn(struct crystalhd_hw *hw)
 	hw->pfnWriteDevRegister(hw->adp,
 		BCHP_DECODE_CPUREGS2_0_REG_WATCHDOG_TMR,
 		0xffffffff);
+#else
+	regVal = 0;
 #endif
 
 	/* Stop memory arbiter first to freese memory access */
@@ -1747,7 +1749,7 @@ bool crystalhd_flea_check_input_full(struct crystalhd_hw *hw, uint32_t needed_sz
 	return false; /*Indicate Empty*/
 }
 
-BC_STATUS crystalhd_flea_fw_cmd_post_proc(struct crystalhd_hw *hw, BC_FW_CMD *fw_cmd)
+static BC_STATUS crystalhd_flea_fw_cmd_post_proc(struct crystalhd_hw *hw, BC_FW_CMD *fw_cmd)
 {
 	BC_STATUS sts = BC_STS_SUCCESS;
 	struct DecRspChannelStartVideo *st_rsp = NULL;
