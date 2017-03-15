@@ -558,11 +558,13 @@ uint32_t link_GetPicInfoLineNum(struct crystalhd_dio_req *dio, uint8_t *base)
 			| (((uint32_t)(*(base + 4)) << 8)  & 0x0000ff00)
 			| (((uint32_t)(*(base + 2)) << 16) & 0x00ff0000)
 			| (((uint32_t)(*(base + 0)) << 24) & 0xff000000);
+#if 0 /*error: comparison of constant '2' with boolean expression is always false*/
 	} else if (dio->uinfo.b422mode == MODE422_UYVY) {
 		PicInfoLineNum = ((uint32_t)(*(base + 7)) & 0xff)
 			| (((uint32_t)(*(base + 5)) << 8)  & 0x0000ff00)
 			| (((uint32_t)(*(base + 3)) << 16) & 0x00ff0000)
 			| (((uint32_t)(*(base + 1)) << 24) & 0xff000000);
+#endif
 	} else {
 		PicInfoLineNum = ((uint32_t)(*(base + 3)) & 0xff)
 			| (((uint32_t)(*(base + 2)) << 8)  & 0x0000ff00)
@@ -592,10 +594,12 @@ uint32_t link_GetMode422Data(struct crystalhd_dio_req *dio,
 		for (i = 0; i < 4; i++)
 			((uint8_t*)tmp)[i] =
 				((uint8_t*)pPicInfoLine)[(offset + i) * 2];
+#if 0 /*error: comparison of constant '2' with boolean expression is always false*/
 	} else if (dio->uinfo.b422mode == MODE422_UYVY) {
 		for (i = 0; i < 4; i++)
 			((uint8_t*)tmp)[i] =
 				((uint8_t*)pPicInfoLine)[(offset + i) * 2 + 1];
+#endif
 	}
 
 	return val;
@@ -745,9 +749,11 @@ bool link_GetPictureInfo(struct crystalhd_hw *hw, uint32_t picHeight, uint32_t p
 	if (dio->uinfo.b422mode == MODE422_YUY2) {
 		for (i = 0; i < 4; i++)
 			((uint8_t *)tmp)[i] = ((uint8_t *)dio->pib_va)[i * 2];
+#if 0 /*error: comparison of constant '2' with boolean expression is always false*/
 	} else if (dio->uinfo.b422mode == MODE422_UYVY) {
 		for (i = 0; i < 4; i++)
 			((uint8_t *)tmp)[i] = ((uint8_t *)dio->pib_va)[(i * 2) + 1];
+#endif
 	} else
 		pic_number = *(uint32_t *)(dio->pib_va);
 

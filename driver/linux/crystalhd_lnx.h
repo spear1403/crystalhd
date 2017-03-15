@@ -43,8 +43,12 @@
 #include <linux/vmalloc.h>
 
 #include <linux/io.h>
+#include <linux/version.h>
 #include <asm/irq.h>
 #include <asm/pgtable.h>
+#if LINUX_VERSION_CODE < KERNEL_VERSION(3, 4, 0)
+#include <asm/system.h>
+#endif /*LINUX_VERSION_CODE < KERNEL_VERSION(3, 4, 0)*/
 #include <linux/uaccess.h>
 
 #include "crystalhd_cmds.h"

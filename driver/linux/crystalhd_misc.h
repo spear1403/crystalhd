@@ -35,6 +35,9 @@
 #include <linux/ioctl.h>
 #include <linux/dma-mapping.h>
 #include <linux/sched.h>
+#if LINUX_VERSION_CODE < KERNEL_VERSION(3, 4, 0)
+#include <asm/system.h>
+#endif /*LINUX_VERSION_CODE < KERNEL_VERSION(3, 4, 0)*/
 #include "bc_dts_glob_lnx.h"
 #include "crystalhd_hw.h"
 
@@ -79,7 +82,7 @@ struct crystalhd_dio_user_info {
 struct crystalhd_dio_req {
 	uint32_t						sig;
 	uint32_t						max_pages;
-	struct page						**pages;
+  	struct page						**pages;
 	struct scatterlist				*sg;
 	int								sg_cnt;
 	int								page_cnt;

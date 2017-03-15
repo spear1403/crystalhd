@@ -652,8 +652,11 @@ BC_STATUS crystalhd_map_dio(struct crystalhd_adp *adp, void *ubuff,
 	}
 
 	down_read(&current->mm->mmap_sem);
-	res = get_user_pages(current, current->mm, uaddr, nr_pages, rw == READ,
-			     0, dio->pages, NULL);
+#if LINUX_VERSION_CODE >= KERNEL_VERSION(4, 9, 0)
+	res = get_user_pages(uaddr, nr_pages, (rw == READ) ? FOLL_WRITE : 0, dio->pages, NULL);  /* -> mempolicy.c */
+#else /*LINUX_VERSION_CODE >= KERNEL_VERSION(4, 9, 0)*/
+	res = get_user_pages(current, current->mm, uaddr, nr_pages, rw == READ, 0, dio->pages, NULL);
+#endif /*LINUX_VERSION_CODE >= KERNEL_VERSION(4, 9, 0)*/
 	up_read(&current->mm->mmap_sem);
 
 	/* Save for release..*/
@@ -751,7 +754,11 @@ BC_STATUS crystalhd_unmap_dio(struct crystalhd_adp *adp, struct crystalhd_dio_re
 				if (!PageReserved(page) &&
 				    (dio->direction == DMA_FROM_DEVICE))
 					SetPageDirty(page);
+#if LINUX_VERSION_CODE >= KERNEL_VERSION(4,9,0)
+				put_page(page); /* -> __bio_unmap_user */
+#else /*LINUX_VERSION_CODE >= KERNEL_VERSION(4,9,0)*/
 				page_cache_release(page);
+#endif /*LINUX_VERSION_CODE >= KERNEL_VERSION(4,9,0)*/
 			}
 		}
 	}
