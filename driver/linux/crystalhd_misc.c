@@ -26,6 +26,9 @@
 
 #include <linux/device.h>
 #include <linux/version.h>
+#if LINUX_VERSION_CODE >= KERNEL_VERSION(4, 14, 0)
+#include <linux/sched/signal.h>
+#endif /*LINUX_VERSION_CODE >= KERNEL_VERSION(4, 14, 0)*/
 
 #include "crystalhd_lnx.h"
 #include "crystalhd_misc.h"

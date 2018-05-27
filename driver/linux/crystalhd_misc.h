@@ -35,6 +35,10 @@
 #include <linux/ioctl.h>
 #include <linux/dma-mapping.h>
 #include <linux/sched.h>
+#include <linux/version.h>
+#if LINUX_VERSION_CODE >= KERNEL_VERSION(4, 14, 0)
+#include <linux/sched/signal.h>
+#endif /*LINUX_VERSION_CODE >= KERNEL_VERSION(4, 14, 0)*/
 #include "bc_dts_glob_lnx.h"
 #include "crystalhd_hw.h"
 
