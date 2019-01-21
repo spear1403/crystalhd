@@ -509,7 +509,7 @@ void crystalhd_flea_runtime_power_up(struct crystalhd_hw *hw)
 
 	/*printk("RT Power Up Flea Complete\n"); */
 
-	rdtscll(currTick);
+	currTick = rdtsc_ordered();
 
 	hw->TickSpentInPD += (currTick - hw->TickStartInPD);
 
@@ -731,7 +731,7 @@ void crystalhd_flea_runtime_power_dn(struct crystalhd_hw *hw)
 	/*printk("RT Power Down Flea Complete\n"); */
 
 	/* Measure how much time we spend in idle */
-	rdtscll(hw->TickStartInPD);
+	hw->TickStartInPD = rdtsc_ordered();
 
 	return;
 }
@@ -2870,7 +2870,7 @@ bool flea_GetPictureInfo(struct crystalhd_hw *hw, struct crystalhd_rx_dma_pkt * 
 		hw->PDRatio = 0; /* NAREN - reset PD ratio to start measuring for new clip */
 		hw->PauseThreshold = hw->DefaultPauseThreshold;
 		hw->TickSpentInPD = 0;
-		rdtscll(hw->TickCntDecodePU);
+		hw->TickCntDecodePU = rdtsc_ordered();
 
 		dev_dbg(dev, "[FMT CH] DoneSz:0x%x, PIB:%x %x %x %x %x %x %x %x %x %x\n",
 			rx_pkt->dio_req->uinfo.y_done_sz * 4,
