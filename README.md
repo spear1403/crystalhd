@@ -1,7 +1,5 @@
-# Crystal HD Hardware Decoder Driver on Ubuntu 19.04 Linux kernel 3.8.0-25
+# Crystal HD Hardware Decoder Driver on antiX-17.4.1 Linux with 4.9.170.antix.1 kernel
 ## Broadcom BCM70012 & BCM70015
-
-After a lot a retries to get the rigth experience with the Crystal HD on Ubuntu, 
 
 **1. Install required files**
 
@@ -42,11 +40,10 @@ Use make command to compile driver. If you have multiple core processor then use
     
  Then you should see something like this:
  
-    [    4.349765] Loading crystalhd v3.10.0
-    [    4.349823] crystalhd 0000:02:00.0: Starting Device:0x1615
-    [    4.351848] crystalhd 0000:02:00.0: irq 43 for MSI/MSI-X
-    [  108.512135] crystalhd 0000:02:00.0: Opening new user[0] handle
-    [  258.976583] crystalhd 0000:02:00.0: Closing user[0] handle via ioctl with mode 10200
+    [   47.292489] crystalhd: loading out-of-tree module taints kernel.
+    [   47.293484] Loading crystalhd v3.10.0
+    [   47.293551] crystalhd 0000:03:00.0: Starting Device:0x1615
+
 
 Now is time to enjoy our FullHD content. 
 
