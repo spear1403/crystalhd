@@ -1,17 +1,17 @@
-# Crystal HD Hardware Decoder Driver on Ubuntu 13.04 Linux kernel 3.8.0-25
+# Crystal HD Hardware Decoder Driver on Ubuntu 19.04 Linux kernel 3.8.0-25
 ## Broadcom BCM70012 & BCM70015
 
 After a lot a retries to get the rigth experience with the Crystal HD on Ubuntu, 
 
 **1. Install required files**
 
-    sudo apt-get install checkinstall git-core autoconf build-essential subversion dpkg-dev fakeroot pbuilder build-essential dh-make debhelper devscripts patchutils quilt git-buildpackage pristine-tar git yasm zlib1g-dev zlib-bin libzip-dev libx11-dev libx11-dev libxv-dev vstream-client-dev libgtk2.0-dev libpulse-dev libxxf86dga-dev x11proto-xf86dga-dev git libgstreamermm-0.10-dev libgstreamer0.10-dev automake libtool python-appindicator 
+    sudo apt-get install checkinstall git-core autoconf build-essential subversion dpkg-dev fakeroot pbuilder build-essential dh-make debhelper devscripts patchutils quilt git-buildpackage pristine-tar git yasm zlib1g-dev zlib-bin libzip-dev libx11-dev libx11-dev libxv-dev vstream-client-dev libgtk2.0-dev libpulse-dev libxxf86dga-dev x11proto-xf86dga-dev git automake libtool python-appindicator 
     
 **2. Ge the source**
 
 Get the driver source code from the git repository.
 
-    git clone https://github.com/dbason/crystalhd.git
+    git clone https://github.com/spear1403/crystalhd.git
 
 _The original repo source is available at git://git.linuxtv.org/jarod/crystalhd.git_
     
