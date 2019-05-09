@@ -3,6 +3,7 @@
 
 **1. Install required files**
 
+    sudo apt-get update
     sudo apt-get install checkinstall git-core autoconf build-essential subversion dpkg-dev fakeroot pbuilder build-essential dh-make debhelper devscripts patchutils quilt git-buildpackage pristine-tar git yasm zlib1g-dev minizip libzip-dev libx11-dev libx11-dev libxv-dev vstream-client-dev libgtk2.0-dev libpulse-dev libxxf86dga-dev x11proto-xf86dga-dev git automake libtool python-appindicator 
     
 **2. Ge the source**
@@ -40,20 +41,12 @@ Use make command to compile driver. If you have multiple core processor then use
     
  Then you should see something like this:
  
-    [   47.292489] crystalhd: loading out-of-tree module taints kernel.
-    [   47.293484] Loading crystalhd v3.10.0
-    [   47.293551] crystalhd 0000:03:00.0: Starting Device:0x1615
+    [ 3611.315661] Loading crystalhd v3.10.0
 
 
 Now is time to enjoy our FullHD content. 
 
-I'm using XMBC , VLC (2.1.0), Mplayer2, GStreamer because they are using (they should) the Crystal HD decoder libraries.
-
-For example , lets try VLC :
-
-    vlc --codec=crystalhd ourgreatfullhdmedia.mkv
-    
-Now runs smoothly rigth ?
+I'm using SMplayer
 
 # After kernel update
 
@@ -61,12 +54,3 @@ Reinstall the driver.
 
     cd crystalhd/driver/linux
     sudo make install
-
-
-Btw this instructions referred to http://knowledge.evot.biz/documentation/how-to-compile-and-install-the-broadcom-crystal-hd-hardware-decoder-bcm70012-70015-driver-on-ubuntu and fixed some issues appeared using a patch from M25 user at https://bbs.archlinux.org/viewtopic.php?pid=1253622#p1253622
-
-So, the sources on this repository are updated with the fixes and patches in order to make your life easier.
-
-## History
-
-See [HISTORY.md](HISTORY.md) for a rough history of the various versions of this driver floating around the web.
