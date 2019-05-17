@@ -41,7 +41,8 @@ Use make command to compile driver. If you have multiple core processor then use
     
  Then you should see something like this:
  
-    [ 3611.315661] Loading crystalhd v3.10.0
+    [  886.604511] Loading crystalhd v3.10.0
+    [  886.604588] crystalhd 0000:03:00.0: Starting Device:0x1615
 
 
 Now is time to enjoy our FullHD content. 
