@@ -1,10 +1,10 @@
-# Crystal HD Hardware Decoder Driver on antiX-17.4.1 Linux with 4.9.170.antix.1 kernel
+# Crystal HD Hardware Decoder Driver
 ## Broadcom BCM70012 & BCM70015
 
 **1. Install required files**
 
     sudo apt-get update
-    sudo apt-get install checkinstall git-core autoconf build-essential subversion dpkg-dev fakeroot pbuilder build-essential dh-make debhelper devscripts patchutils quilt git-buildpackage pristine-tar git yasm zlib1g-dev minizip libzip-dev libx11-dev libxv-dev vstream-client-dev libgtk2.0-dev libpulse-dev libxxf86dga-dev x11proto-xf86dga-dev git automake libtool libgstreamer1.0-dev libgstreamer-plugins-base1.0-dev python-appindicator 
+    sudo apt-get install linux-headers-`uname -` git autoconf build-essential subversion dpkg-dev fakeroot pbuilder build-essential dh-make debhelper devscripts patchutils quilt git-buildpackage pristine-tar git yasm zlib1g-dev minizip libzip-dev libx11-dev libxv-dev vstream-client-dev libgtk2.0-dev libpulse-dev libxxf86dga-dev x11proto-xf86dga-dev git automake libtool libgstreamer1.0-dev libgstreamer-plugins-base1.0-dev python-appindicator 
     
 **2. Ge the source**
 
@@ -43,15 +43,3 @@ Use make command to compile driver. If you have multiple core processor then use
  
     [  886.604511] Loading crystalhd v3.10.0
     [  886.604588] crystalhd 0000:03:00.0: Starting Device:0x1615
-
-
-Now is time to enjoy our FullHD content. 
-
-I'm using SMplayer
-
-# After kernel update
-
-Reinstall the driver.
-
-    cd crystalhd/driver/linux
-    sudo make install
