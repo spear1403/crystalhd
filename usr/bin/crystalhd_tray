@@ -1,0 +1,97 @@
+#!/usr/bin/python
+# -*- coding: utf-8 -*-
+### BEGIN LICENSE
+# Copyright (C) 2012 Marcel Schumacher schumi2012@googlemail.com
+#
+# This program is free software: you can redistribute it and/or modify it 
+# under the terms of the GNU General Public License version 3, as published 
+# by the Free Software Foundation.
+# 
+# This program is distributed in the hope that it will be useful, but 
+# WITHOUT ANY WARRANTY; without even the implied warranties of 
+# MERCHANTABILITY, SATISFACTORY QUALITY, or FITNESS FOR A PARTICULAR 
+# PURPOSE. See the GNU General Public License for more details.
+# 
+# You should have received a copy of the GNU General Public License along 
+# with this program.  If not, see <http://www.gnu.org/licenses/>.
+### END LICENSE
+# Version 1.00
+
+import os
+import gi
+gi.require_version('Gtk', '3.0')
+gi.require_version('AppIndicator3', '0.1')
+from gi.repository import Gtk as gtk
+from gi.repository import AppIndicator3 as appindicator
+from gi.repository import GLib
+from shutil import copyfile
+
+Path = "/usr/share/crystalhd_tray/icons/"
+startup_file = os.path.expanduser("~/.desktop-session/startup")
+
+class CrystalHD_Indicator:
+
+  def __init__(self):
+    self.app = "crystalhd_tray"
+    self.indicator = appindicator.Indicator.new(self.app, Path+"/ON.svg", appindicator.IndicatorCategory.APPLICATION_STATUS)
+    self.indicator.set_status(appindicator.IndicatorStatus.ACTIVE)
+    self.indicator.set_menu(self.menu())
+    self.indicator.set_label("Crystal HD", self.app)
+
+    #Make tray-icon autostart
+    if os.path.isfile(startup_file):
+      with open(startup_file, 'a+') as infile:
+        if not 'crystalhd_tray &' in infile.read():
+          copyfile(startup_file, startup_file + '.bak')
+          infile.write('\n# Crystal HD system tray icon\ncrystalhd_tray &\n')
+
+  def main(self):
+    self.check_chd()
+    GLib.timeout_add_seconds(3, self.check_chd)
+    gtk.main()
+
+  def menu(self):
+    self.menu = gtk.Menu()
+    
+    self.exittray = gtk.MenuItem('Exit Tray')
+    self.exittray.connect('activate', self.quit)
+    self.menu.append(self.exittray)
+    
+    self.menu.show_all()
+    return self.menu
+    
+  def quit(self, widget):
+    gtk.main_quit(self)
+
+  def check_chd(self):
+    crystalhd=str(os.popen('dmesg | grep crystalhd | tail -1').readlines())
+
+    #Ready:
+    if crystalhd.find("Starting")!= -1 or crystalhd.find("latency")!= -1 or crystalhd.find("Closing")!= -1:
+      self.indicator.set_icon(Path+"/ON.svg")
+                  
+    #Stalling while decoding:
+    elif crystalhd.find("FETCH")!= -1:
+      self.indicator.set_icon(Path+"/STALL.svg")
+      
+    #Deactivated:
+    elif crystalhd.find("disabled")!= -1 or crystalhd.find("released")!= -1:
+      self.indicator.set_icon(Path+"/OFF.svg")
+
+    #Error while decoding:
+    elif crystalhd.find("failed")!= -1 or crystalhd.find("segfault")!= -1 or crystalhd.find("RIP")!= -1 or crystalhd.find("Failed")!= -1:
+      self.indicator.set_icon(Path+"/ERROR.svg")
+          
+    #Working:
+    elif crystalhd.find("Opening")!= -1 or crystalhd.find("MISSING")!= -1 or crystalhd.find("PIB")!=-1: 
+      self.indicator.set_icon(Path+"/ACTIVE.svg")
+    
+    #Empty state, crystalhd was blacklisted or isn't installed at all:
+    else: 
+      self.indicator.set_icon(Path+"/OFF.svg")
+            
+    return True
+
+if __name__ == "__main__":
+  indicator = CrystalHD_Indicator()
+  indicator.main()
