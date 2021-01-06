@@ -6,7 +6,7 @@
     sudo apt-get update
     sudo apt-get install linux-headers-`uname -r` git autoconf build-essential subversion dpkg-dev fakeroot pbuilder build-essential dh-make debhelper devscripts patchutils quilt git-buildpackage pristine-tar git yasm zlib1g-dev minizip libzip-dev libx11-dev libxv-dev vstream-client-dev libgtk2.0-dev libpulse-dev libxxf86dga-dev x11proto-xf86dga-dev git automake libtool libgstreamer1.0-dev libgstreamer-plugins-base1.0-dev gir1.2-appindicator3-0.1 
     
-**2. Ge the source**
+**2. Get the source**
 
 Get the driver source code from the git repository.
 
@@ -56,4 +56,4 @@ _Borrowed and modified to work on antiX from https://github.com/Ardakilic/indica
  
      indicator-crystalhd 
             
- at the terminal. It'll run and set itself to run at autostart.
+ It will run and set itself to run at autostart.
