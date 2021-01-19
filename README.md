@@ -55,6 +55,6 @@ _Borrowed and modified to work on antiX from https://github.com/Ardakilic/indica
     
  Run 
  
-     crystalhd_tray
+     sudo crystalhd_tray
             
  It will run and set itself to run at autostart.
