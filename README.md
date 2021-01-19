@@ -45,15 +45,16 @@ Use make command to compile driver. If you have multiple core processor then use
     [  886.604588] crystalhd 0000:03:00.0: Starting Device:0x1615
     
 **7. Optional: Install a system-tray icon** , a simple tray icon where CrystalHD driver status is visible.
+  (Best visible on a dark themed toolbar)
 
 _Borrowed and modified to work on antiX from https://github.com/Ardakilic/indicator-crystalhd.git_
  
     cd ../../
     sudo cp usr / -R
-    chmod +x /usr/bin/crystalhd_tray
+    sudo chmod +x /usr/bin/crystalhd_tray
     
  Run 
  
-     indicator-crystalhd 
+     crystalhd_tray
             
  It will run and set itself to run at autostart.
