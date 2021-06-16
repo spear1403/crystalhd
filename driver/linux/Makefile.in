@@ -2,6 +2,7 @@
 #  Broadcom Crystal HD (BCM970012) controller Makefile.
 #
 #
+CONFIG_MODULE_SIG=n
 KDIR = @KERN_DIR@
 
 
@@ -30,7 +31,7 @@ obj-m := crystalhd.o
 	crystalhd-objs := $(OBJ)
 
 all:
-	$(MAKE) -C $(KDIR) SUBDIRS=$(PWD) modules
+	$(MAKE) -C $(KDIR) M=$(shell pwd) modules
 
 install:
 	if [ -e "/lib/udev/rules.d" ] ; then cp -f 20-crystalhd.rules /lib/udev/rules.d/ ; fi
