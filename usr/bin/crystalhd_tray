@@ -52,6 +52,10 @@ class CrystalHD_Indicator:
 
   def menu(self):
     self.menu = gtk.Menu()
+
+    self.restart_chd = gtk.MenuItem('Restart Module')
+    self.restart_chd.connect('activate', self.restart)
+    self.menu.append(self.restart_chd)
     
     self.exittray = gtk.MenuItem('Exit Tray')
     self.exittray.connect('activate', self.quit)
@@ -59,6 +63,10 @@ class CrystalHD_Indicator:
     
     self.menu.show_all()
     return self.menu
+
+  def restart(self,widget):
+    os.popen('gksudo "modprobe -r crystalhd"')
+    os.popen('gksudo modprobe crystalhd')
     
   def quit(self, widget):
     gtk.main_quit(self)
